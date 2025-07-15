@@ -104,8 +104,6 @@ function main() {
     z = new Complex(0, 0)
     w = new Complex(0, 0)
 
-
-    let minustwoa = -(2 * z.real)
     while (running) {
         testResults[0] = testA(z, w)
         testResults[1] = testB(z, w)
@@ -114,7 +112,7 @@ function main() {
         if (testResults[1]) resString += "B"
         if (testResults[2]) resString += "C"
         print = `${z.stringify()} & ${w.stringify()}: ${resString} (${iteration})`
-        if ((resString !== "C") && (resString !== "")) {
+        if (resString.length > 1) {
             if (!(z.stringify() === "0" && w.stringify() === "0")) {
                 console.log(print)
                 if (resString === "ABC") {
@@ -127,19 +125,19 @@ function main() {
         print = ""
         resString = ""
 
-        while (!(minustwoa === w.real && w === z.conjugate())) {
-            z.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
-            w.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
-        }
-
-
-
-
+        z.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
+        w = z.conjugate()
         testResults = [false, false, false]
         iteration++
     }
+
+
     console.log(`${iteration} iterations`)
+
+
 }
+
+
 
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
