@@ -103,6 +103,9 @@ function main() {
     let iteration = 1
     z = new Complex(0, 0)
     w = new Complex(0, 0)
+
+
+    let minustwoa = -(2 * z.real)
     while (running) {
         testResults[0] = testA(z, w)
         testResults[1] = testB(z, w)
@@ -110,7 +113,7 @@ function main() {
         if (testResults[0]) resString += "A"
         if (testResults[1]) resString += "B"
         if (testResults[2]) resString += "C"
-        print = `${z.stringify()} & ${w.stringify()}: ${resString}`
+        print = `${z.stringify()} & ${w.stringify()}: ${resString} (${iteration})`
         if ((resString !== "C") && (resString !== "")) {
             if (!(z.stringify() === "0" && w.stringify() === "0")) {
                 console.log(print)
@@ -123,8 +126,15 @@ function main() {
 
         print = ""
         resString = ""
-        z.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
-        w.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
+
+        while (!(minustwoa === w.real && w === z.conjugate())) {
+            z.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
+            w.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
+        }
+
+
+
+
         testResults = [false, false, false]
         iteration++
     }
