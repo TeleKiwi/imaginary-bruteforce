@@ -126,7 +126,7 @@ function main() {
         resString = ""
 
         z.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
-        w = z.conjugate()
+        w.update(randomIntFromInterval(1, Math.pow(2, 16)), randomIntFromInterval(1, Math.pow(2, 16)))
         testResults = [false, false, false]
         iteration++
     }
